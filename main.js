@@ -403,9 +403,9 @@ function resetLauncherIntervals(type) {
 function spawnLauncher(icon, type) {
   const launcher = document.createElement('div');
   launcher.className = `powerup-launcher launcher-${type}`;
-  // Using the local images provided in the project root
+  // Using relative paths for GitHub Pages compatibility
   const img = document.createElement('img');
-  img.src = type === 'missile' ? '/missile-launcher.webp' : '/guitar.webp';
+  img.src = type === 'missile' ? 'missile-launcher.webp' : 'guitar.webp';
   img.style.width = '100%';
   img.style.height = '100%';
   img.style.objectFit = 'contain';
