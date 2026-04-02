@@ -403,7 +403,7 @@ function resetLauncherIntervals(type) {
 function spawnLauncher(icon, type) {
   const launcher = document.createElement('div');
   launcher.className = `powerup-launcher launcher-${type}`;
-  // Using relative paths for GitHub Pages compatibility
+  // For Vite, files in /public are served from the root path
   const img = document.createElement('img');
   img.src = type === 'missile' ? 'missile-launcher.webp' : 'guitar.webp';
   img.style.width = '100%';

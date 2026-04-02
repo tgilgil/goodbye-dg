@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DavidG - Bisou Clicker</title>
+    <script type="module" crossorigin src="./assets/index-B1LuayNG.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-m1J6ZBjG.css">
+  </head>
+  <body>
+    <div id="game-container">
+      <div id="ui">
+        <div class="stat-box">
+          <span class="label">Bisous :</span>
+          <span id="score">0</span>
+        </div>
+        <div class="stat-box">
+          <span class="label">Auto-Becs :</span>
+          <span id="auto-clickers">0</span>
+        </div>
+      </div>
+
+      <div id="play-area">
+        <div id="david-target" class="david-character">
+          <div class="david-body">
+            <div class="hair"></div>
+            <div class="head">
+              <div class="beard"></div>
+              <div class="face-details">
+                <div class="eyes">
+                  <div class="eye left"></div>
+                  <div class="eye right"></div>
+                </div>
+                <div class="blush" id="blush"></div>
+                <div class="mouth" id="mouth"></div>
+              </div>
+            </div>
+            <div class="tshirt"></div>
+            <div class="shorts"></div>
+          </div>
+          <div id="kiss-indicator">💋</div>
+        </div>
+      </div>
+
+      <div id="shop">
+        <div class="shop-section">
+          <h3>Améliorations</h3>
+          <div class="shop-item-container">
+            <button id="buy-auto-clicker" class="shop-item" title="Coût : 10 Bisous">
+              Auto-Bec (10 💋)
+            </button>
+            <p class="shop-item-desc">Envoie des petits cœurs qui cherchent David pour lui donner des becs automatiquement.</p>
+          </div>
+          <div class="shop-item-container">
+            <button id="buy-missile-launcher" class="shop-item" title="Coût : 50 Bisous">
+              Lance-missiles (50 💋)
+            </button>
+            <p class="shop-item-desc">Déploie un lanceur qui tire périodiquement des missiles à tête chercheuse de cœur.</p>
+          </div>
+          <div class="shop-item-container">
+            <button id="buy-guitar" class="shop-item" title="Coût : 100 Bisous">
+              Guitare (100 💋)
+            </button>
+            <p class="shop-item-desc">Fait apparaître une guitare qui sérénade David avec des notes de musique.</p>
+          </div>
+          <div class="shop-item-container">
+            <button id="upgrade-missile-rate" class="shop-item" style="display: none;" title="Coût : 200 Bisous">
+              Cadence de tir (200 💋)
+            </button>
+            <p id="upgrade-missile-rate-desc" class="shop-item-desc" style="display: none;">Augmente la vitesse de tir de tous les lance-missiles.</p>
+          </div>
+          <div class="shop-item-container">
+            <button id="upgrade-guitar-rate" class="shop-item" style="display: none;" title="Coût : 250 Bisous">
+              Vitesse de musique (250 💋)
+            </button>
+            <p id="upgrade-guitar-rate-desc" class="shop-item-desc" style="display: none;">Fait en sorte que les guitares jouent de la musique bien plus souvent.</p>
+          </div>
+          <div class="shop-item-container">
+            <button id="buy-pull-request" class="shop-item" title="Coût : 150 Bisous">
+              Pull Request (150 💋)
+            </button>
+            <p class="shop-item-desc">Crée une zone de PR GitHub qui ralentit David quand il est proche.</p>
+          </div>
+        </div>
+        <div class="shop-section">
+          <h3>Cosmétiques</h3>
+          <div class="cosmetics-grid">
+            <div class="shop-item-container">
+              <button class="cosmetic-item" data-type="hat" data-name="tophat" data-cost="50">
+                🎩 Haut-de-forme (50 💋)
+              </button>
+              <p class="shop-item-desc">Un chapeau ben classe pour un David ben classe.</p>
+            </div>
+            <div class="shop-item-container">
+              <button class="cosmetic-item" data-type="hat" data-name="viking" data-cost="150">
+                🪖 Casque Viking (150 💋)
+              </button>
+              <p class="shop-item-desc">Pour les sessions de becs en mode pillage.</p>
+            </div>
+            <div class="shop-item-container">
+              <button class="cosmetic-item" data-type="glasses" data-name="shades" data-cost="100">
+                🕶️ Lunettes fumées (100 💋)
+              </button>
+              <p class="shop-item-desc">Rend David trop cool pour l'école (mais pas trop cool pour les becs).</p>
+            </div>
+            <div class="shop-item-container">
+              <button class="cosmetic-item" data-type="aura" data-name="sparkles" data-cost="300">
+                ✨ Étincelles (300 💋)
+              </button>
+              <p class="shop-item-desc">Ajoute une lueur magique à la présence de David.</p>
+            </div>
+            <div class="shop-item-container">
+              <button class="cosmetic-item" data-type="ui" data-name="arcade" data-cost="500">
+                🕹️ Mode Arcade (500 💋)
+              </button>
+              <p class="shop-item-desc">Vivez le jeu à travers un vieil écran CRT d'arcade.</p>
+            </div>
+            <div class="shop-item-container">
+              <button class="cosmetic-item" data-type="ui" data-name="minecraft" data-cost="750">
+                🧱 Mode Cubique (750 💋)
+              </button>
+              <p class="shop-item-desc">Entrez dans un monde de voxels et de pixels cutes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="crt-overlay"></div>
+  </body>
+</html>
