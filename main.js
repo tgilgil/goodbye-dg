@@ -134,6 +134,12 @@ function setRandomTarget() {
   } else {
     speed = 0.03;
   }
+
+  // Force David's image for production consistency
+  const head = david.querySelector('.head');
+  if (head) {
+    head.style.backgroundImage = "url('david.webp')";
+  }
 }
 
 function updatePosition() {
