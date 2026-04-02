@@ -53,8 +53,42 @@ body {
   flex-direction: column;
   background: var(--ui-bg);
   border-top: 2px solid var(--primary-color);
-  max-height: 250px;
-  overflow-y: auto;
+  max-height: 350px;
+  overflow-y: visible; /* Changed from auto to visible so tooltips don't get cut off */
+  z-index: 100;
+}
+
+.shop-item-container {
+  display: inline-block;
+  position: relative;
+  margin: 0.2rem;
+  /* Ensure container doesn't clip children */
+}
+
+.shop-item-desc {
+  visibility: hidden; /* Changed from display:none to visibility for better browser support */
+  opacity: 0;
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  width: 220px;
+  font-size: 0.9rem;
+  z-index: 9999;
+  pointer-events: none;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  transition: opacity 0.2s, visibility 0.2s;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.shop-item-container:hover .shop-item-desc {
+  visibility: visible;
+  opacity: 1;
 }
 
 .shop-section {
@@ -65,6 +99,100 @@ body {
   margin: 0.2rem 0;
   font-size: 1rem;
   color: var(--primary-color);
+}
+
+.shop-item-container {
+  display: inline-block;
+  position: relative;
+  margin: 0.2rem;
+}
+
+.shop-item-desc {
+  display: none;
+  position: absolute;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 4px;
+  width: 180px;
+  font-size: 0.75rem;
+  z-index: 100;
+  pointer-events: none;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.shop-item-desc::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+.shop-item-container:hover .shop-item-desc {
+  display: block;
+}
+
+.shop-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.cosmetics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.shop-item-container:hover .shop-item-desc {
+  display: block;
+}
+
+.shop-item-desc {
+  display: none;
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: white;
+  padding: 0.5rem 0.8rem;
+  border-radius: 8px;
+  width: 200px;
+  font-size: 0.85rem;
+  z-index: 1000;
+  pointer-events: none;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  line-height: 1.4;
+}
+
+body.arcade-mode .shop-item-desc {
+  background: #000;
+  border: 1px solid #00ff41;
+  color: #00ff41;
+}
+
+body.arcade-mode .shop-item-desc::after {
+  border-color: #00ff41 transparent transparent transparent;
+}
+
+body.minecraft-mode .shop-item-desc {
+  background: #3c3c3c;
+  border: 2px solid #1a1a1a;
+  border-radius: 0;
+  box-shadow: 4px 4px #000;
 }
 
 .cosmetics-grid {
@@ -88,9 +216,14 @@ body {
 }
 
 .cosmetic-item.owned {
+  background: #e1f5fe;
+  border-color: #03a9f4;
+  cursor: pointer;
+}
+
+.cosmetic-item.equipped {
   background: #c8e6c9;
   border-color: #4caf50;
-  cursor: default;
 }
 
 .cosmetic-item:disabled {
@@ -262,22 +395,317 @@ body {
 }
 
 /* Animations */
-@keyframes giggle {
-  0% { transform: rotate(0deg) scale(1.1); }
-  25% { transform: rotate(-5deg) scale(1.1); }
-  50% { transform: rotate(5deg) scale(1.1); }
-  75% { transform: rotate(-5deg) scale(1.1); }
-  100% { transform: rotate(0deg) scale(1.1); }
+.auto-kisser {
+  position: absolute;
+  font-size: 1.5rem;
+  pointer-events: none;
+  z-index: 100;
+}
+/* Arcade CRT Styles */
+body.arcade-mode {
+  background-color: #1a1a1a;
+  color: #00ff41;
+}
+
+body.arcade-mode #ui, 
+body.arcade-mode #shop {
+  background: #222;
+  border-color: #00ff41;
+  color: #00ff41;
+}
+
+body.arcade-mode .stat-box {
+  color: #00ff41;
+  text-shadow: 0 0 5px #00ff41;
+}
+
+body.arcade-mode .shop-item {
+  background-color: #008f11;
+  border: 2px solid #00ff41;
+}
+
+body.arcade-mode .cosmetic-item {
+  background-color: #111;
+  color: #00ff41;
+  border-color: #008f11;
+}
+
+body.arcade-mode #play-area {
+  background: radial-gradient(circle, #222 0%, #000 100%);
+}
+
+#crt-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+body.arcade-mode #crt-overlay {
+  opacity: 1;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.1) 50%
+  ), linear-gradient(
+    90deg, 
+    rgba(255, 0, 0, 0.03), 
+    rgba(0, 255, 0, 0.01), 
+    rgba(0, 0, 255, 0.03)
+  );
+  background-size: 100% 4px, 3px 100%;
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
+}
+
+body.arcade-mode #crt-overlay::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(18, 16, 16, 0.03);
+  opacity: 0;
+  z-index: 1001;
+  pointer-events: none;
+  animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.27861; }
+  5% { opacity: 0.34769; }
+  10% { opacity: 0.23604; }
+  15% { opacity: 0.90626; }
+  20% { opacity: 0.18128; }
+  25% { opacity: 0.83891; }
+  30% { opacity: 0.65583; }
+  35% { opacity: 0.57807; }
+  40% { opacity: 0.26593; }
+  45% { opacity: 0.84623; }
+  50% { opacity: 0.96019; }
+  55% { opacity: 0.08594; }
+  60% { opacity: 0.20313; }
+  65% { opacity: 0.71988; }
+  70% { opacity: 0.53455; }
+  75% { opacity: 0.37288; }
+  80% { opacity: 0.71428; }
+  85% { opacity: 0.70419; }
+  90% { opacity: 0.7003; }
+  95% { opacity: 0.36108; }
+  100% { opacity: 0.24387; }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+body.arcade-mode #game-container {
+  filter: sepia(0.2) brightness(1.2) contrast(1.1) saturate(1.2);
+}
+
+/* Minecraft Mode Styles */
+body.minecraft-mode {
+  image-rendering: pixelated;
+  background-color: #87ceeb; /* Sky blue */
+}
+
+body.minecraft-mode #ui,
+body.minecraft-mode #shop {
+  background: #3c3c3c;
+  color: white;
+  border-color: #1a1a1a;
+  box-shadow: inset -4px -4px #1a1a1a, inset 4px 4px #8a8a8a;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+body.minecraft-mode .shop-item,
+body.minecraft-mode .cosmetic-item {
+  background: #707070;
+  color: white;
+  border: none;
+  border-radius: 0;
+  box-shadow: inset -4px -4px #3a3a3a, inset 4px 4px #b0b0b0;
+}
+
+body.minecraft-mode .shop-item:hover,
+body.minecraft-mode .cosmetic-item:hover {
+  background: #8b8b8b;
+}
+
+body.minecraft-mode #play-area {
+  background: url('https://www.transparenttextures.com/patterns/pinstriped-suit.png'), #567d46; /* Grassy look */
+}
+
+body.minecraft-mode .david-character {
+  transform-style: preserve-3d;
+}
+
+body.minecraft-mode .head,
+body.minecraft-mode .tshirt,
+body.minecraft-mode .shorts {
+  border-radius: 0 !important;
+  box-shadow: 4px 4px rgba(0,0,0,0.2);
+}
+
+body.minecraft-mode .head {
+  width: 64px;
+  height: 64px;
+  background-image: none !important;
+  background-color: #ffdbac;
+  border: 4px solid #3e2723;
+  position: relative;
+}
+
+/* Blocky Face for Minecraft mode (No Hair/Beard) */
+body.minecraft-mode .head::after {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: 10px;
+  width: 44px;
+  height: 30px;
+  background: 
+    linear-gradient(black, black) 5px 5px / 8px 8px,
+    linear-gradient(black, black) 31px 5px / 8px 8px,
+    linear-gradient(#3e2723, #3e2723) 12px 20px / 20px 5px;
+  background-repeat: no-repeat;
+}
+
+body.minecraft-mode .auto-kisser {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+}
+
+.pull-request-card {
+  position: absolute;
+  background: white;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  color: #24292f;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  z-index: 15;
+  min-width: 200px;
+  pointer-events: none;
+}
+
+.pr-icon {
+  color: #1a7f37; /* Open PR green */
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.pr-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.pr-title {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.pr-meta {
+  color: #57606a;
+}
+
+.pr-radius-visual {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: rgba(26, 127, 55, 0.05);
+  border: 1px dashed rgba(26, 127, 55, 0.2);
+  z-index: 14;
+}
+
+/* Minecraft Mode Adjustment */
+body.minecraft-mode .pull-request-card {
+  border-radius: 0;
+  border: 2px solid #1a1a1a;
+  box-shadow: 4px 4px 0 #000;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+body.minecraft-mode .pr-radius-visual {
+  border-radius: 0;
+  border: 2px dashed #1a7f37;
 }
 
 .giggle {
   animation: giggle 0.5s ease-in-out;
 }
 
-.auto-kisser {
+.powerup-launcher {
   position: absolute;
-  font-size: 1.5rem;
   pointer-events: none;
-  z-index: 4;
-  transition: all 1s linear;
+  z-index: 10;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 1px solid rgba(0,0,0,0.1); /* Temporary debug border */
+}
+
+.launcher-missile {
+  background-image: url('https://img.icons8.com/color/96/rpg-7.png') !important;
+  width: 120px;
+  height: 60px;
+  background-color: transparent !important;
+  color: transparent !important; /* Hide the emoji text if image works */
+  font-size: 0;
+}
+
+.launcher-guitar {
+  background-image: url('https://img.icons8.com/color/96/electric-guitar.png') !important;
+  width: 80px;
+  height: 80px;
+  background-color: transparent !important;
+  color: transparent !important; /* Hide the emoji text if image works */
+  font-size: 0;
+}
+
+/* Fallback if images fail */
+.launcher-missile:empty::before { content: '🚀'; font-size: 2rem; color: initial; }
+.launcher-guitar:empty::before { content: '🎸'; font-size: 2rem; color: initial; }
+
+.projectile {
+  position: absolute;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.missile {
+  font-size: 1.2rem;
+  transform-origin: center;
+}
+
+.note-wave {
+  font-size: 1.5rem;
+  opacity: 0.8;
+}
+
+@keyframes wave-pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.5); opacity: 0.5; }
+  100% { transform: scale(2); opacity: 0; }
 }
