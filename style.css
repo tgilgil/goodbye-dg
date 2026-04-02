@@ -322,11 +322,11 @@ body.minecraft-mode .shop-item-desc {
 .head {
   width: 60px;
   height: 60px;
-  background: var(--skin-tone);
+  background-color: var(--skin-tone);
   border-radius: 50%;
   position: relative;
   z-index: 2;
-  background-image: url('david.webp');
+  background-image: url('./david.webp');
   background-size: cover;
   background-position: center;
   border: 2px solid var(--hair-color);
