@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DavidG - Bisou Clicker</title>
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <div id="game-container">
+      <div id="ui">
+        <div class="stat-box">
+          <span class="label">Bisous:</span>
+          <span id="score">0</span>
+        </div>
+        <div class="stat-box">
+          <span class="label">Auto-Kisses:</span>
+          <span id="auto-clickers">0</span>
+        </div>
+      </div>
+
+      <div id="play-area">
+        <div id="david-target" class="david-character">
+          <div class="david-body">
+            <div class="hair"></div>
+            <div class="head">
+              <div class="beard"></div>
+              <div class="face-details">
+                <div class="eyes">
+                  <div class="eye left"></div>
+                  <div class="eye right"></div>
+                </div>
+                <div class="blush" id="blush"></div>
+                <div class="mouth" id="mouth"></div>
+              </div>
+            </div>
+            <div class="tshirt"></div>
+            <div class="shorts"></div>
+          </div>
+          <div id="kiss-indicator">💋</div>
+        </div>
+      </div>
+
+      <div id="shop">
+        <div class="shop-section">
+          <h3>Upgrades</h3>
+          <button id="buy-auto-clicker" class="shop-item" title="Cost: 10 Bisous">
+            Buy Auto-Clicker (10 💋)
+          </button>
+        </div>
+        <div class="shop-section">
+          <h3>Cosmetics</h3>
+          <div class="cosmetics-grid">
+            <button class="cosmetic-item" data-type="hat" data-name="tophat" data-cost="50">
+              🎩 Top Hat (50 💋)
+            </button>
+            <button class="cosmetic-item" data-type="hat" data-name="viking" data-cost="150">
+              🪖 Viking Helm (150 💋)
+            </button>
+            <button class="cosmetic-item" data-type="glasses" data-name="shades" data-cost="100">
+              🕶️ Cool Shades (100 💋)
+            </button>
+            <button class="cosmetic-item" data-type="aura" data-name="sparkles" data-cost="300">
+              ✨ Sparkles (300 💋)
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
